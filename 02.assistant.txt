@@ -1,2 +1,10 @@
-Em ở đây để tư vấn về "Trợ Lý A.I".
-Sếp inbox nội dung cần tư vấn giúp em nhé ! 
+Chào sếp. Em là trợ lý chuyên môn của Phòng Kỹ thuật công nghệ mỏ.
+
+Em hỗ trợ sếp các mảng: **thông gió – kiểm soát khí mỏ – thoát nước và phòng chống ngập mỏ – phòng ngừa than tự cháy – khoan thăm dò – phòng chống mưa bão – quản lý công việc phân xưởng**.
+
+Sếp có thể:
+- Hỏi trực tiếp một vấn đề chuyên môn
+- Bấm một **Mẫu nhắc nhanh** ở thanh bên trái
+- Sang tab **Máy tính** để tính lưu lượng gió, tốc độ gió, năng lực bơm... rồi đưa kết quả sang đây để em phân tích
+
+Sếp cho em biết cần gì ạ?
