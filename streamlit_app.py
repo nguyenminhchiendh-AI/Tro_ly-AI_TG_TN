@@ -186,7 +186,15 @@ with tab_chat:
 # --------------------------------------------------------- HIỂN THỊ KẾT QUẢ
 
 def hien_ket_qua(kq: tt.KetQua, khoa: str):
-    st.success(f"**{kq.ten}: {kq.gia_tri:,.2f} {kq.don_vi}**")
+    # Mau o ket qua phai phan anh dung trang thai an toan:
+    # do = pha vo nguong, vang = co luu y can doc, xanh = khong co van de.
+    nhan = f"**{kq.ten}: {kq.gia_tri:,.2f} {kq.don_vi}**"
+    if kq.vuot_nguong:
+        st.error("🚫 KHÔNG ĐẠT — " + nhan)
+    elif kq.canh_bao:
+        st.warning("⚠️ CẦN LƯU Ý — " + nhan)
+    else:
+        st.success("✅ " + nhan)
     st.caption(f"Công thức đã dùng: {kq.cong_thuc}")
     if kq.dien_giai:
         st.info(kq.dien_giai)

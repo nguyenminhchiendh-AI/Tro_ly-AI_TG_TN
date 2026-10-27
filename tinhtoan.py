@@ -17,9 +17,13 @@ class KetQua:
     cong_thuc: str
     dien_giai: str = ""
     canh_bao: list = field(default_factory=list)
+    # True khi gia tri da pha vo mot nguong an toan hoac mot yeu cau bat buoc.
+    # Giao dien dua vao day de to do o ket qua thay vi to xanh.
+    vuot_nguong: bool = False
 
     def tom_tat(self) -> str:
-        dong = [f"{self.ten}: {self.gia_tri:,.2f} {self.don_vi}",
+        trang_thai = "KHONG DAT" if self.vuot_nguong else "Dat"
+        dong = [f"{self.ten}: {self.gia_tri:,.2f} {self.don_vi} [{trang_thai}]",
                 f"Công thức: {self.cong_thuc}"]
         if self.dien_giai:
             dong.append(self.dien_giai)
@@ -118,6 +122,8 @@ def toc_do_gio(luu_luong_m3_phut, tiet_dien, v_min=0.25, v_max=4.0):
         cong_thuc=f"v = Q / (60 x S) = {luu_luong_m3_phut} / (60 x {tiet_dien})",
         dien_giai=f"Dải cho phép đang đặt: {v_min} - {v_max} m/s.",
     )
+    if v < v_min or v > v_max:
+        kq.vuot_nguong = True
     if v < v_min:
         kq.canh_bao.append(
             f"Tốc độ gió {v:.2f} m/s THẤP HƠN mức tối thiểu {v_min} m/s - "
@@ -145,6 +151,7 @@ def nong_do_ch4_du_bao(q_ch4, luu_luong_gio, c_gio_vao=0.0, c_cho_phep=1.0):
         dien_giai=f"Ngưỡng cho phép đang đặt: {c_cho_phep} %.",
     )
     if c >= c_cho_phep:
+        kq.vuot_nguong = True
         kq.canh_bao.append(
             f"Nồng độ dự báo {c:.3f}% ĐẠT/VƯỢT ngưỡng {c_cho_phep}% - "
             "phải tăng lưu lượng gió hoặc xử lý nguồn phát khí trước khi sản xuất."
@@ -197,6 +204,7 @@ def nang_luc_bom(q_nuoc_ve, q_mot_bom, so_bom_hoat_dong, he_so_du_phong=1.2):
                   f"yêu cầu tối thiểu {yeu_cau:,.1f} m3/giờ (đã tính dự phòng).",
     )
     if nang_luc < yeu_cau:
+        kq.vuot_nguong = True
         thieu = yeu_cau - nang_luc
         can_them = thieu / q_mot_bom if q_mot_bom > 0 else 0
         kq.canh_bao.append(
