@@ -1,0 +1,14 @@
+# Khoá API - TUYỆT ĐỐI KHÔNG đưa lên GitHub
+.streamlit/secrets.toml
+*.key
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Gói sản phẩm tạm thời (không thuộc mã nguồn)
+*.zip
+*.patch
