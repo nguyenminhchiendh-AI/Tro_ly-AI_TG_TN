@@ -139,49 +139,62 @@ def keo_gian(e, trong_block_dim=False):
         try: e.translate(DL * UX, DL * UY, 0)
         except Exception: pass
 
-if DL != 0:
-    for e in list(msp):
-        keo_gian(e)
-
-# --------------------------------------------- nhan ban cac bo vi chong ----
-def u_range(e):
-    t = e.dxftype()
-    pts = []
-    if t == "LINE": pts = [e.dxf.start, e.dxf.end]
-    elif t == "LWPOLYLINE": return (lambda us: (min(us), max(us)))([u_of(x, y) for x, y in e.get_points("xy")]) if len(e) else None
-    elif t == "POLYLINE": pts = [v.dxf.location for v in e.vertices]
-    if pts:
-        us = [u_of(p.x, p.y) for p in pts]; return min(us), max(us)
+# ------------------------------- dac trung cua entity: (u giua, be rong theo u)
+def dac_trung(e):
+    t = e.dxftype(); us = []
+    if t == "LINE":
+        us = [u_of(e.dxf.start.x, e.dxf.start.y), u_of(e.dxf.end.x, e.dxf.end.y)]
+    elif t == "LWPOLYLINE":
+        us = [u_of(x, y) for x, y in e.get_points("xy")]
+    elif t == "POLYLINE":
+        us = [u_of(v.dxf.location.x, v.dxf.location.y) for v in e.vertices]
+    if us:
+        return (us[0] + us[-1]) / 2 if len(us) < 3 else (min(us) + max(us)) / 2, max(us) - min(us)
     try:
         bb = bbox.extents([e])
         if not bb.has_data: return None
         cs = [(bb.extmin.x, bb.extmin.y), (bb.extmax.x, bb.extmax.y),
               (bb.extmin.x, bb.extmax.y), (bb.extmax.x, bb.extmin.y)]
-        us = [u_of(*c) for c in cs]
-        cu = u_of(bb.center.x, bb.center.y)
-        if max(us) - min(us) > 3.0 * BUOC:     # doi tuong dai (duong nen, dim tong...) -> khong nhan ban
-            return None
-        return cu, cu
+        uu = [u_of(*c) for c in cs]
+        return u_of(bb.center.x, bb.center.y), max(uu) - min(uu)
     except Exception:
         return None
 
-if N_THEM > 0:
-    A, B = U_CAT - BUOC, U_CAT          # mot chu ky mau
-    mau = []
+CUC_BO = 3.0 * BUOC      # be rong toi da de coi la chi tiet cuc bo (lap lai)
+
+# ---- RUT NGAN: xoa bot cac bo vi chong truoc khi don phan dau tren lai gan ----
+if N_THEM < 0:
+    n_xoa = 0
     for e in list(msp):
-        if e.dxftype() == "DIMENSION" and e.dxf.get("geometry", None):
-            pass
-        r = u_range(e)
-        if r and r[0] >= A - 120 and r[1] <= B + 120:
+        r = dac_trung(e)
+        if r and r[1] <= CUC_BO and (U_CAT + DL) <= r[0] < U_CAT:
+            try: msp.delete_entity(e); n_xoa += 1
+            except Exception: pass
+    print(f"  Da xoa {n_xoa} doi tuong ung voi {-N_THEM} bo vi chong")
+
+# ---- KEO DAI: ghi nho mot chu ky mau TRUOC khi keo gian ----
+mau = []
+if N_THEM > 0:
+    A, B = U_CAT - BUOC, U_CAT
+    for e in list(msp):
+        r = dac_trung(e)
+        if r and r[1] <= CUC_BO and A <= r[0] < B:
             mau.append(e)
     print(f"  Chu ky mau u=[{A:.0f},{B:.0f}] co {len(mau)} doi tuong")
-    for k in range(N_THEM):
-        d = (k + 1) * BUOC
-        for e in mau:
-            try:
-                ne = e.copy(); msp.add_entity(ne); ne.translate(d * UX, d * UY, 0)
-            except Exception:
-                pass
+
+# ---- keo gian toan bo ban ve ----
+if DL != 0:
+    for e in list(msp):
+        keo_gian(e)
+
+# ---- KEO DAI: nhan ban chu ky mau vao cho trong ----
+for k in range(max(0, N_THEM)):
+    d = (k + 1) * BUOC
+    for e in mau:
+        try:
+            ne = e.copy(); msp.add_entity(ne); ne.translate(d * UX, d * UY, 0)
+        except Exception:
+            pass
 
 # ---------------------------------------- cap nhat nhan chieu dai tong L=
 NHAN_L = sys.argv[4] if len(sys.argv) > 4 else None
