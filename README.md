@@ -21,12 +21,25 @@ Mỗi kết quả đều hiện rõ công thức đã dùng để người kiể
 và tự cảnh báo khi vượt ngưỡng. Bấm nút *"Đưa kết quả này sang trợ lý phân tích"*
 để chuyển số liệu vừa tính sang tab hỏi đáp.
 
+## Bộ mẫu Báo cáo ngày Phòng KCM
+
+| File | Dùng để |
+|---|---|
+| `Mau_bao_cao_ngay_KCM.docx` | Biểu mẫu Word 4 trang A4 để in, điền tay, ký và gửi lãnh đạo |
+| `Mau_theo_doi_so_lieu_ngay_KCM.xlsx` | Sổ theo dõi số liệu theo ngày. Gõ ngày vào sheet `BC_Ngay` là ra toàn bộ số liệu tổng hợp của ngày đó; sheet `TH_Thang` tự vẽ biểu đồ xu hướng cả tháng |
+| `kienthuc/mau_bao_cao_ngay.md` | Bản chữ của khung báo cáo, sửa trực tiếp trên GitHub |
+
+> Trước khi dùng chính thức: mở sheet `DM` của file Excel, điền danh mục khu vực – trạm bơm –
+> phân xưởng của Công ty và **xác nhận lại toàn bộ trị số ngưỡng cảnh báo** theo
+> QCVN 01:2011/BCT bản hiện hành. Các trị số có sẵn chỉ là gợi ý, chưa được thẩm định.
+
 ## Cách sửa nội dung (không cần biết lập trình)
 
 Sửa trực tiếp trên GitHub: mở file → bấm biểu tượng **cây bút ✏️** → sửa → *Commit changes*.
 
 | Muốn đổi | Sửa file |
 |---|---|
+| Khung Báo cáo ngày | `kienthuc/mau_bao_cao_ngay.md` |
 | Cách trợ lý trả lời, kiến thức nền | `01.system_trainning.txt` |
 | Lời chào mở đầu | `02.assistant.txt` |
 | Tiêu đề ứng dụng | `00.xinchao.txt` |

@@ -1,2 +1,7 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# File Office la nhi phan - khong chuyen doi dau xuong dong
+*.docx binary
+*.xlsx binary
+*.pptx binary

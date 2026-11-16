@@ -22,3 +22,6 @@ Mỗi dòng là một mẫu câu hỏi hay dùng. Ứng dụng đọc file này 
 - [Quản lý] Họp giao ban đầu ca :: Gợi ý khung nội dung họp giao ban đầu ca của Phòng KCM, thời lượng từng mục và cách ghi biên bản gọn.
 - [Quản lý] Phân tích số liệu theo dõi :: Hướng dẫn em cách tổ chức một bảng Excel theo dõi số liệu khí mỏ theo ngày sao cho dễ tổng hợp cuối tháng và tự vẽ được biểu đồ xu hướng.
 - [Mưa bão] Kế hoạch ứng phó bão :: Lập khung kế hoạch ứng phó khi có tin bão đổ bộ khu vực Quảng Ninh, phần việc thuộc trách nhiệm Phòng KCM, theo các mốc thời gian trước - trong - sau bão.
+- [Báo cáo ngày] Soạn báo cáo ngày từ số liệu :: Soạn Báo cáo ngày của Phòng KCM theo đúng khung 7 mục: thông gió, khí mỏ, thoát nước, than tự cháy, khoan thăm dò, công việc phân xưởng, đánh giá - kiến nghị. Số liệu sẽ được dán ngay sau đây. Chỗ nào thiếu số liệu thì để dấu [...], tuyệt đối không tự điền số.
+- [Báo cáo ngày] Nhận xét số liệu trong ngày :: Đọc số liệu trong ngày được dán dưới đây, chỉ ra các điểm bất thường so với ngưỡng an toàn, xu hướng cần theo dõi và đề xuất việc phải làm ngay trong ca tới. Nêu rõ chỗ nào em chưa chắc chắn.
+- [Báo cáo ngày] Checklist trực ban đầu giờ :: Lập checklist các việc cán bộ trực ban Phòng KCM phải làm trước 08h00 để có đủ số liệu lập Báo cáo ngày: lấy số liệu ở đâu, hỏi ai, kiểm tra chéo thế nào.
